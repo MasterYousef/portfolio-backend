@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CustomException } from 'src/exceptions/custom.exception';
-import { User } from 'src/modules/auth/Auth.schema';
+import { User } from 'src/modules/auth/auth.schema';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

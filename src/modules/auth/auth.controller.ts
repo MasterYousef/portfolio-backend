@@ -8,7 +8,7 @@ import UpdateUser from './dto/update_user.dto';
 import { File } from 'src/decorator/file.decorator';
 import ChangePassword from './dto/change_password.dto';
 import ResetPassword from './dto/reset_password.dto';
-import { User } from './Auth.schema';
+import { User } from './auth.schema';
 import CodeSend from './dto/code_send.dto';
 import { plainToInstance } from 'class-transformer';
 import errors from 'src/validations/file.validation';

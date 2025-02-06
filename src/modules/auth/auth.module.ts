@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, user_schema } from './Auth.schema';
+import { User, user_schema } from './auth.schema';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
