@@ -35,7 +35,7 @@ async function bootstrap() {
   await app.register(helmet);
   await app.register(fastifyCsrf);
   app.setGlobalPrefix('api/v1');
-  await app.listen(process.env.PORT ?? 8000, () => {
+  await app.listen(process.env.PORT || 8000, () => {
     console.log('listening on port ' + process.env.PORT);
   });
 }
