@@ -54,8 +54,6 @@ pids
 *.pid
 *.seed
 *.pid.lock
-tsconfig.json
-tsconfig.build.json
 .prettierrc
 .eslintrc.js
 
