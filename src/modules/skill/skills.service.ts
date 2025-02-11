@@ -43,6 +43,6 @@ export class SkillsService {
     if (!skill) {
       throw new CustomException('Skill not found', 404);
     }
-    return { message: 'Project deleted successfully' };
+    return { message: 'skill deleted successfully' };
   }
 }

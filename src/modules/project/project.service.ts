@@ -17,7 +17,7 @@ export class ProjectService {
   ) {}
   async create(createProject: CreateProjectDto, buffer: Buffer) {
     const image = await this.CloudinaryService.upload_image(buffer, 'project');
-    createProject.image = image as string;
+    createProject.image = image;
     const data = await this.projectModel.create(createProject);
     return data;
   }
@@ -46,7 +46,7 @@ export class ProjectService {
         'project',
         buffer,
       );
-      updateProject.image = image as string;
+      updateProject.image = image;
     }
     Object.keys(updateProject).forEach(
       (key) => (data[key] = updateProject[key]),

@@ -11,7 +11,7 @@ export class CloudinaryService {
     });
   }
 
-  async upload_image(buffer: Buffer, folder: string) {
+  async upload_image(buffer: Buffer, folder: string): Promise<string> {
     return await new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
@@ -38,7 +38,11 @@ export class CloudinaryService {
     });
   }
 
-  async replaceImage(publicId: string, folder: string, fileBuffer: Buffer) {
+  async replaceImage(
+    publicId: string,
+    folder: string,
+    fileBuffer: Buffer,
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(

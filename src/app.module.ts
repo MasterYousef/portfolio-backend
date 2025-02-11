@@ -11,6 +11,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CloudinaryService } from './cloudinary/cloudinary.service';
 import { EmailModule } from './email/email.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { CertificationModule } from './modules/certification/certification.module';
 
 configDotenv({ path: './src/config/config.env' });
 
@@ -49,6 +50,7 @@ configDotenv({ path: './src/config/config.env' });
     ]),
     AuthModule,
     SkillModule,
+    CertificationModule,
     ProjectModule,
     CommentModule,
     EmailModule,
