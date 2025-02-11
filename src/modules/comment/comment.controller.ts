@@ -15,6 +15,7 @@ import { set_id } from 'src/decorator/set_id.decorator';
 import { CommentGuard } from 'src/guards/comment.guard';
 import { Public } from 'src/decorator/public.decorator';
 import { UpdateCommentDto } from './dto/update_comment.dto';
+import IdParamDto from 'src/validations/id-param.dto';
 @Controller('comment')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
@@ -27,8 +28,8 @@ export class CommentController {
   }
   @Public()
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commentService.findOne(id);
+  findOne(@Param() Param: IdParamDto) {
+    return this.commentService.findOne(Param.id);
   }
   @Public()
   @Get()
@@ -37,13 +38,13 @@ export class CommentController {
   }
   @Roles('user')
   @Put(':id')
-  update(@Param('id') id: string, @Body() data: UpdateCommentDto) {
-    return this.commentService.update(id, data);
+  update(@Param() Param: IdParamDto, @Body() data: UpdateCommentDto) {
+    return this.commentService.update(Param.id, data);
   }
   @Roles('user')
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentService.remove(id);
+  remove(@Param() Param: IdParamDto) {
+    return this.commentService.remove(Param.id);
   }
 
   @Public()

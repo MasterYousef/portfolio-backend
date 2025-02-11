@@ -48,9 +48,9 @@ export class ProjectService {
       );
       updateProject.image = image;
     }
-    Object.keys(updateProject).forEach(
-      (key) => (data[key] = updateProject[key]),
-    );
+    Object.keys(updateProject).forEach((key) => {
+      if (updateProject[key] !== undefined) data[key] = updateProject[key];
+    });
     await data.save();
     if (!data) {
       throw new CustomException('Project not found', 404);

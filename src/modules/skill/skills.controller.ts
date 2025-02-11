@@ -14,6 +14,7 @@ import UpdateSkillDto from './dto/update-skill.dto';
 import { Roles } from 'src/decorator/role.decorator';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { Public } from 'src/decorator/public.decorator';
+import IdParamDto from 'src/validations/id-param.dto';
 @Controller('skills')
 @UseGuards(AuthGuard)
 export class SkillController {
@@ -30,17 +31,17 @@ export class SkillController {
   }
   @Public()
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.skillsService.findOne(id);
+  findOne(@Param() Param: IdParamDto) {
+    return this.skillsService.findOne(Param.id);
   }
   @Roles('admin')
   @Put(':id')
-  update(@Body() data: UpdateSkillDto, @Param('id') id: string) {
-    return this.skillsService.update(id, data);
+  update(@Body() data: UpdateSkillDto, @Param() Param: IdParamDto) {
+    return this.skillsService.update(Param.id, data);
   }
   @Roles('admin')
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.skillsService.remove(id);
+  remove(@Param() Param: IdParamDto) {
+    return this.skillsService.remove(Param.id);
   }
 }

@@ -9,6 +9,7 @@ import { File } from 'src/decorator/file.decorator';
 import { plainToInstance } from 'class-transformer';
 import { CustomException } from 'src/exceptions/custom.exception';
 import errors from 'src/validations/file.validation';
+import IdParamDto from 'src/validations/id-param.dto';
 
 @Controller('project')
 export class ProjectController {
@@ -28,24 +29,26 @@ export class ProjectController {
   }
   @Public()
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.projectService.findOne(id);
+  findOne(@Param() Param: IdParamDto) {
+    return this.projectService.findOne(Param.id);
   }
   @Roles('user')
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param() Param: IdParamDto,
     @Req() req: Request,
     @File() file: Buffer,
   ) {
-    const data = plainToInstance(UpdateProjectDto, req.body);
+    const data = plainToInstance(UpdateProjectDto, req.body, {
+      excludeExtraneousValues: true,
+    });
     await errors(data);
-    return this.projectService.update(id, data, file);
+    return this.projectService.update(Param.id, data, file);
   }
   @Roles('user')
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.projectService.remove(id);
+  remove(@Param() Param: IdParamDto) {
+    return this.projectService.remove(Param.id);
   }
   @Roles('user')
   @Post(':id/like')

@@ -12,6 +12,7 @@ import { User } from './auth.schema';
 import CodeSend from './dto/code_send.dto';
 import { plainToInstance } from 'class-transformer';
 import errors from 'src/validations/file.validation';
+import IdParamDto from 'src/validations/id-param.dto';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -27,8 +28,8 @@ export class AuthController {
   }
   @Public()
   @Get(':id')
-  get_user(@Param('id') id: string) {
-    return this.authService.get_user(id);
+  get_user(@Param() Param: IdParamDto) {
+    return this.authService.get_user(Param.id);
   }
 
   @Get('user')
@@ -38,18 +39,20 @@ export class AuthController {
 
   @Put(':id')
   async update_user(
-    @Param('id') id: string,
+    @Param() Param: IdParamDto,
     @Req() req: Request,
     @File() file: Buffer,
   ) {
-    const data = plainToInstance(UpdateUser, req.body);
+    const data = plainToInstance(UpdateUser, req.body, {
+      excludeExtraneousValues: true,
+    });
     await errors(data);
-    return this.authService.update_user(id, data, file);
+    return this.authService.update_user(Param.id, data, file);
   }
 
   @Put(':id/change_password')
-  change_password(@Body() data: ChangePassword, @Param('id') id: string) {
-    return this.authService.change_password(data, id);
+  change_password(@Body() data: ChangePassword, @Param() Param: IdParamDto) {
+    return this.authService.change_password(data, Param.id);
   }
   @Public()
   @Post('forgot_password')

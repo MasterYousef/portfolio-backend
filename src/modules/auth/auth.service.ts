@@ -81,13 +81,15 @@ export class AuthService {
           'user',
           buffer,
         );
-        User.image = image as string;
+        User.image = image;
       } else {
         const image = await this.CloudinaryService.upload_image(buffer, 'user');
-        User.image = image as string;
+        User.image = image;
       }
     }
-    Object.keys(User).forEach((key) => (data[key] = User[key]));
+    Object.keys(User).forEach((key) => {
+      if (User[key] !== undefined) data[key] = User[key];
+    });
     await data.save();
     if (!data) {
       throw new CustomException('user not found', 404);
