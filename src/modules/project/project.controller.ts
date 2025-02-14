@@ -14,7 +14,7 @@ import IdParamDto from 'src/validations/id-param.dto';
 @Controller('project')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
-  @Roles('user')
+  @Roles('admin')
   @Post()
   async create(@Req() req: Request, @File() file: Buffer) {
     if (!file) throw new CustomException('File not found', 404);
@@ -32,7 +32,7 @@ export class ProjectController {
   findOne(@Param() Param: IdParamDto) {
     return this.projectService.findOne(Param.id);
   }
-  @Roles('user')
+  @Roles('admin')
   @Put(':id')
   async update(
     @Param() Param: IdParamDto,
@@ -45,7 +45,7 @@ export class ProjectController {
     await errors(data);
     return this.projectService.update(Param.id, data, file);
   }
-  @Roles('user')
+  @Roles('admin')
   @Delete(':id')
   remove(@Param() Param: IdParamDto) {
     return this.projectService.remove(Param.id);
