@@ -14,6 +14,9 @@ export const File = createParamDecorator(
             throw new CustomException('Invalid image ', 401);
           }
           file = await part.toBuffer();
+        } else if (part.fieldname === 'skills') {
+          body['skills'] = body['skills'] || [];
+          body['skills'].push(part.value);
         } else {
           body[part.fieldname] = part.value;
         }
