@@ -1,7 +1,7 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { User } from '../auth/auth.schema';
-import { Project } from '../project/project.schema';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
+import { User } from "../auth/auth.schema";
+import { Project } from "../project/project.schema";
 
 export type comment_document = HydratedDocument<Comment>;
 
@@ -22,3 +22,7 @@ export class Comment {
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment);
+
+CommentSchema.pre("find", function () {
+  this.populate("user", "username _id image");
+});
