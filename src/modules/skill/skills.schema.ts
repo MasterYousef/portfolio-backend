@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { HydratedDocument } from "mongoose";
 
 export type CatDocument = HydratedDocument<skill>;
 
@@ -9,7 +9,7 @@ export class skill {
   name: string;
 
   @Prop({ required: true })
-  count: number;
+  image: string;
 }
 
 export const SkillSchema = SchemaFactory.createForClass(skill);
