@@ -17,6 +17,9 @@ export const File = createParamDecorator(
         } else if (part.fieldname === "skills") {
           body["skills"] = body["skills"] || [];
           body["skills"].push(part.value);
+        } else if (part.fieldname === "features") {
+          body["features"] = body["features"] || [];
+          body["features"].push(part.value);
         } else {
           body[part.fieldname] = part.value;
         }

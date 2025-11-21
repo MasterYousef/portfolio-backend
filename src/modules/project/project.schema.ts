@@ -1,6 +1,6 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { User } from '../auth/auth.schema';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
+import { User } from "../auth/auth.schema";
 
 export type project_document = HydratedDocument<Project>;
 
@@ -18,12 +18,15 @@ export class Project {
   @Prop({ required: true })
   image: string;
 
+  @Prop({ required: true })
+  features: string[];
+
   @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: User.name })
   likes: [User];
 }
 
 export const project_schema = SchemaFactory.createForClass(Project);
 
-project_schema.pre('init', function () {
-  this.populate('likes', 'username _id');
+project_schema.pre("init", function () {
+  this.populate("likes", "username _id");
 });
